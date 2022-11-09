@@ -11,25 +11,12 @@ app.get('/api', (req, res) => {
 app.get('/api/recipes', async (req, res) => {
   //without the recipe id the server crashes
   //careful that nodemon continuosly updates the server and will repeatedly doing api requests. only have 150!
-  const apiUrl = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=261a492e3ec14356acb7df09dd9b4175&includeNutrition=false`;
+  const apiUrl = `https://api.spoonacular.com/recipes/${recipeId}/information?${apiKey}&includeNutrition=false`;
   const fetchRes = await fetch(apiUrl);
   const json = await fetchRes.json();  
   console.log(json);
   res.json(json);
 });
-
-
-// https://api.spoonacular.com/recipes/716429/information?apiKey=261a492e3ec14356acb7df09dd9b4175&includeNutrition=false
-// https://api.spoonacular.com/recipes/:recipeId/information?apiKey=261a492e3ec14356acb7df09dd9b4175&includeNutrition=false
-
-// app.get('api/recipes', async (req, res) => {
-//   // const apiUrl = `https://api.spoonacular.com/recipes//information?apiKey=261a492e3ec14356acb7df09dd9b4175&includeNutrition=false`;
-//   const apiUrl = 'https://api.spoonacular.com/recipes/716429/information?apiKey=261a492e3ec14356acb7df09dd9b4175&includeNutrition=false';
-//   const fetchRes = await fetch(apiUrl);
-//   const json = await fetchRes.json();  
-//   console.log(json);
-//   res.json(json);
-// })
 
 app.listen(5000, () => console.log('Server listening on port 5000'));
 //require node fetch 2.0
