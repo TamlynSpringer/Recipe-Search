@@ -1,27 +1,16 @@
 import React from 'react';
-import React, { useEffect, useState } from 'react';
 
-const Board = () => {
-  const [backendData, setBackendData] = useState([{}]);
-  useEffect(() => {
-    fetch('./api').then(
-      response => response.json()
-    ).then(
-      data => {
-        setBackendData(data)
-      }
-    )
-  }, []);
-
+const Board = ({ recipeData }) => {
+  
   return (
     <div>
       <section>
-      {(typeof backendData.users === 'undefined') ? (
+      {(typeof recipeData.recipes === 'undefined') ? (
         <p>Loading...</p>
       ) : (
-        backendData.users.map((user, i) => (
+        recipeData.recipes.map((recipe, i) => (
           <p key={i}>
-            {user}
+            {recipe}
           </p>
         ))
       )}
