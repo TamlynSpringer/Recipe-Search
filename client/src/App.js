@@ -1,25 +1,31 @@
 import { useNavigate } from "react-router-dom";
 import Header from "./Components/Header.js";
 import Footer from "./Components/Footer.js";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import RecipeList from './Components/RecipeList';
 
 const App = () => {
 
-  const [input, setInput] = useState('');
-  const [recipeData, setRecipeData] = useState([]);
+  const [input, setInput] = useState('pumpkin');
+  const [recipeData, setRecipeData] = useState([{}]);
+  console.log(recipeData);
   // const navigate = useNavigate();
   
   const onSearchRecipes = (e) => {
     e.preventDefault();
-    if (input && typeof input === 'string') {
-      fetch(`./api/recipes/${input}`)
-        .then((response) => response.json())
-        .then(data => {
-          setRecipeData(data.results);
-      })
-    }
-    // navigate(`/recipes/${input}`);
+   
   };
+
+  const getRecipes = async () => {
+    const response = await fetch(`./api/recipes/${input}`);
+    const data = await response.json();
+    console.log('data:', data.hits);
+    setRecipeData(data.hits)
+  };
+
+  useEffect(() => {
+    getRecipes()
+  }, [input]);
   
   const onChangeInput = (e) => {
     setInput(e.target.value);
@@ -28,7 +34,6 @@ const App = () => {
   return (
     <>
       <Header className='app__header' />
-
       <section>
         <form onSubmit={onSearchRecipes}>
           <input 
@@ -38,16 +43,17 @@ const App = () => {
           <button type="submit">Search</button>
         </form>
       </section>
-
       <section>
-        {(typeof recipeData === 'undefined') ? (
+      {(typeof recipeData === 'undefined') ? (
           <p>Loading...</p>
         ) : (
-          recipeData.map((recipe, i) => (
-            <article key={i}  id={recipe.id}>
-              <h1> {recipe.title} </h1>
-              <img src={recipe.image} alt={recipe.title}></img>
-            </article>
+          recipeData.map((recipe) => (
+            <RecipeList 
+            key={recipe.recipe.label}
+            title={recipe.recipe.label}
+            image={recipe.recipe.image}
+            />
+           
           ))
         )}
       </section>
@@ -57,7 +63,10 @@ const App = () => {
 }
 
 export default App;
-
+/* <article>
+          <h2>{recipeData.recipe.label}</h2>
+          <img src={recipeData.recipe.image} alt={recipeData.recipe.label} />
+        </article> */
 // {JSON.stringify(recipe)}
 // .then(response => {
 //   if (!response.ok) {
@@ -91,3 +100,13 @@ export default App;
       // console.log('recipe results:', recipeResults);
       // setRecipeData(recipeResults);
     // }
+
+    // if (input && typeof input === 'string') {
+    //   fetch(`./api/recipes/${input}`)
+    //     .then((response) => console.log(response.json()))
+    //     .then(data => {
+    //       console.log('data results: ', data);
+    //       setRecipeData(data.results);
+    //   })
+    // }
+    // navigate(`/recipes/${input}`);
