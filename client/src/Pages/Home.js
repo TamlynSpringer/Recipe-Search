@@ -1,10 +1,10 @@
 import React from 'react';
-import Search from '../Components/SearchInput';
+import SearchInput from '../Components/SearchInput'
 
-const Home = () => {
+const Home = ({ input, onChangeInput, onSearchRecipes }) => {
   return (
     <>
-      <Search />
+      <SearchInput value={input} onChange={onChangeInput} onSubmit={onSearchRecipes} />
     </>
   )
 }

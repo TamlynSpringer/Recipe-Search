@@ -4,7 +4,7 @@ import SearchInput from '../Components/SearchInput'
 const Search = ({ search }) => {
   return (
     <>
-      <SearchInput search={search} />
+      
     </>
   )
 };
