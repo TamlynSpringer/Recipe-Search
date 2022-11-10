@@ -15,10 +15,11 @@ app.get('/api/recipes', async (req, res) => {
   const fetchRes = await fetch(apiUrl);
   const json = await fetchRes.json();  
   console.log(json);
-  res.json(json);
+  // res.json(json);
 });
+
 
 app.listen(5000, () => console.log('Server listening on port 5000'));
 //require node fetch 2.0
 //or use import with node fetch 3.0
-//create a post end point with the /recipes
+//create a get end point with the /recipes
