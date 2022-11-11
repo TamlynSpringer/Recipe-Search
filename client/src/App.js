@@ -3,12 +3,15 @@ import Footer from "./Components/Footer.js";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RecipeList from "./Components/RecipeList";
+import uuid from 'react-uuid';
 
 const App = () => {
   const [input, setInput] = useState("Pumpkin");
   const [recipeData, setRecipeData] = useState([{}]);
+  const [loading, setLoading] = useState(true);
   // const [search, setSearch] = useState("");
-  console.log(recipeData);
+  console.log(recipeData, 'recipe');
+  console.log(input, 'input');
   // const navigate = useNavigate();
 
   const onSearchRecipes = async (e) => {
@@ -18,27 +21,32 @@ const App = () => {
     //       .then((response) => console.log(response.json()))
     //       .then(data => {
     //         console.log('data results: ', data.hits);
-    //         setRecipeData(data.results.hits);
+    //         setRecipeData(data.results);
     //     })
     //   }
     // setInput(search);
     // setSearch("");
   };
 
-  const getRecipes = async () => {
-    const response = await fetch(`./api/recipes/${input}`);
+  const getRecipes = async (inputValue) => {
+    const response = await fetch(`./api/recipes/${inputValue}`);
     const data = await response.json();
-    console.log("data:", data.hits);
-    setRecipeData(data.hits);
+    return data;
   };
 
   useEffect(() => {
-    getRecipes();
+    if (input) {
+      getRecipes(input).then(data => {
+        setRecipeData(data.hits)
+        setLoading(false);
+      });
+    }
+    setLoading(true);
   }, [input]);
 
-  const onChangeInput = (e) => {
-    setInput(e.target.value);
-  };
+  // const onChangeInput = (e) => {
+  //   setInput(e.target.value);
+  // };
 
   return (
     <>
@@ -53,7 +61,7 @@ const App = () => {
                 <input
                   className="input__query"
                   value={input}
-                  onChange={onChangeInput}
+                  onChange={(e) => setInput(e.target.value)}
                   placeholder="Search by keyword..."
                 />
                 <button className="btn__submit" type="submit">Search</button>
@@ -77,22 +85,22 @@ const App = () => {
         </nav>
       </header>
       <section className='section__recipes'>
-      {(typeof recipeData === 'undefined') ? (
+      {(loading) ? (
           <p className="load">Loading...</p>
         ) : (
-          recipeData.map((recipe) => (
+          recipeData?.map((recipe) => (
             <RecipeList 
-            key={Date.now()}
-            title={recipe.recipe.label}
-            image={recipe.recipe.image}
-            ingredients={recipe.recipe.ingredients}
-            source={recipe.recipe.source}
-            url={recipe.recipe.url}
+            key={uuid()}
+            title={recipe?.recipe.label}
+            image={recipe?.recipe.image}
+            ingredients={recipe?.recipe.ingredients}
+            source={recipe?.recipe.source}
+            url={recipe?.recipe.url}
             />
           ))
         )}
       </section>
-      {/* <Footer className="app__footer" /> */}
+      <Footer className="app__footer" />
     </>
   );
 };
