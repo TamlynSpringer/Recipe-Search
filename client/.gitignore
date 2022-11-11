@@ -14,6 +14,7 @@ const apiUrl = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=261a492
 
 # misc
 .DS_Store
+.env
 .env.local
 .env.development.local
 .env.test.local

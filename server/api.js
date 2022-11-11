@@ -11,12 +11,11 @@ app.get('/api', (req, res) => {
 })
 
 app.get(`/api/recipes/:input`, async (req, res) => {
-  console.log('request.params:', req.params);
   const apiUrl = `https://api.edamam.com/search?q=${req.params.input}&app_id=${api_id}&app_key=${api_key}`;
   const fetchRes = await fetch(apiUrl);
   const json = await fetchRes.json();
   
-  console.log('fetch data: ', json.hits);
+  // console.log('fetch data: ', json.hits);
   res.json(json);
 });
 
@@ -31,37 +30,7 @@ app.get(`/api/recipes/:input`, async (req, res) => {
 // })
 
 /*
-  const json = {
-    results: [
-      {
-        id: 632003,
-        title: 'African Bean Soup',
-        image: 'https://spoonacular.com/recipeImages/632003-312x231.jpg',
-        imageType: 'jpg'
-      },
-      {
-        id: 716268,
-        title: 'African Chicken Peanut Stew',
-        image: 'https://spoonacular.com/recipeImages/716268-312x231.jpg',
-        imageType: 'jpg'
-      },
-      {
-        id: 653275,
-        title: 'North African Chickpea Soup',
-        image: 'https://spoonacular.com/recipeImages/653275-312x231.jpg',
-        imageType: 'jpg'
-      },
-      {
-        id: 716298,
-        title: 'How to Make Party Jollof Rice',
-        image: 'https://spoonacular.com/recipeImages/716298-312x231.jpg',
-        imageType: 'jpg'
-      }
-    ],
-    offset: 0,
-    number: 10,
-    totalResults: 4
-  }
+  
   */
 
 module.exports = app; 

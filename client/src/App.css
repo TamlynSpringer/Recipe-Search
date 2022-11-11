@@ -1,38 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Bad+Script&family=Courgette&display=swap');
+
 .App {
-  text-align: center;
+  /* flex: 1; */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header__container {
+  align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  margin: auto;
+  width: 100vw;
+  margin-top: 5rem;
+}
+
+.input__query {
+  background: #ffffff6e;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem;
+  margin: .3rem;
+  min-width: 30vw;
+  padding: .5rem;
+  margin-top: 2rem;
+}
+
+.header {
+  background: #ffffff6e;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  position: fixed;
+  width: 100vw;
+}
+
+.logo {
+  margin-left: 2rem;
+}
+
+.logo > h1 {
+  font-family: 'Bad Script', cursive;
+  color: #fff;
+  font-size: 4rem;
+}
+
+.link_search__container {
+  display: flex;
+  flex-direction: row;
+}
+
+.menu {
+  margin-top: 1rem;
+  display: flex;
+}
+
+.menu > li {
+  display: inline;
+  margin-right: 2rem;
+  font-size: 2rem;
+  padding: 1rem;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.links:link,
+.links:visited {
+  color: #fff;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn__submit {
+  align-items: center;
+  background: #4f886d;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  margin: 0 2.5rem;
+  padding: 0.5rem;
+}
+
+.btn__submit:focus {
+  background: #2a493b;
+  color: #fff;
+}
+
+.btn__submit:hover {
+  background: #FFF;
+  color: #000;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.search__container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 }
