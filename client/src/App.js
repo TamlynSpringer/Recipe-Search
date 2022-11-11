@@ -7,31 +7,34 @@ import RecipeList from "./Components/RecipeList";
 const App = () => {
   const [input, setInput] = useState("Pumpkin");
   const [recipeData, setRecipeData] = useState([{}]);
+  // const [search, setSearch] = useState("");
   console.log(recipeData);
   // const navigate = useNavigate();
 
   const onSearchRecipes = async (e) => {
     e.preventDefault();
-    if (input && typeof input === 'string') {
-        fetch(`./api/recipes/${input}`)
-          .then((response) => console.log(response.json()))
-          .then(data => {
-            console.log('data results: ', data.hits);
-            setRecipeData(data.results.hits);
-        })
-      }
+    // if (input && typeof input === 'string') {
+    //     fetch(`./api/recipes/${input}`)
+    //       .then((response) => console.log(response.json()))
+    //       .then(data => {
+    //         console.log('data results: ', data.hits);
+    //         setRecipeData(data.results.hits);
+    //     })
+    //   }
+    // setInput(search);
+    // setSearch("");
   };
 
-  // const getRecipes = async () => {
-  //   const response = await fetch(`./api/recipes/${input}`);
-  //   const data = await response.json();
-  //   console.log("data:", data.hits);
-  //   setRecipeData(data.hits);
-  // };
+  const getRecipes = async () => {
+    const response = await fetch(`./api/recipes/${input}`);
+    const data = await response.json();
+    console.log("data:", data.hits);
+    setRecipeData(data.hits);
+  };
 
-  // useEffect(() => {
-  //   getRecipes();
-  // }, [input]);
+  useEffect(() => {
+    getRecipes();
+  }, [input]);
 
   const onChangeInput = (e) => {
     setInput(e.target.value);
@@ -73,8 +76,23 @@ const App = () => {
           </div>
         </nav>
       </header>
-      
-      <Footer className="app__footer" />
+      <section className='section__recipes'>
+      {(typeof recipeData === 'undefined') ? (
+          <p className="load">Loading...</p>
+        ) : (
+          recipeData.map((recipe) => (
+            <RecipeList 
+            key={Date.now()}
+            title={recipe.recipe.label}
+            image={recipe.recipe.image}
+            ingredients={recipe.recipe.ingredients}
+            source={recipe.recipe.source}
+            url={recipe.recipe.url}
+            />
+          ))
+        )}
+      </section>
+      {/* <Footer className="app__footer" /> */}
     </>
   );
 };

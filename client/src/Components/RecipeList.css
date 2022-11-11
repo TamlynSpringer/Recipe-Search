@@ -1,8 +1,66 @@
 .section__recipes {
-  background: #ffffff6e;
   align-items: flex-start;
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  margin: 0 4rem;
+  margin: 6rem 4rem;
+  color: black;
+}
+
+.article-card {
+  background: #ffffff6e;
+  border: none;
+  border-radius: 0.3rem;
+  box-shadow: 0 5px 10px 0 #0000004d;
+  font-size: 0.8rem;
+  margin: 1rem 0;
+  min-height: max-content;
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  padding: 0;
+  transition: 200ms transform ease-in-out;
+  width: 100%;
+}
+
+.article-heading {
+  font-family: 'Bad Script', cursive;
+  font-size: 1.8rem;
+}
+
+.article-card:hover > img {
+  transform: scale(1.025);
+}
+
+p {
+  font-size: 1.2rem;
+  color: #000;
+}
+
+.article-heading,
+p {
+  margin: 1rem;
+}
+
+.btn-container {
+  margin-bottom: 1rem;
+}
+
+.btn {
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem;
+  margin: 0 2.5rem;
+  padding: 0.5rem;
+}
+
+.btn > a {
+  color: #000;
 }
