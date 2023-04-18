@@ -24,7 +24,7 @@ img {
   object-position: center;
   padding: 0;
   transition: 200ms transform ease-in-out;
-  width: 100%;
+  width: 20%;
 }
 
 .article-heading {
